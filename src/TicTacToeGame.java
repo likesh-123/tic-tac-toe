@@ -51,5 +51,25 @@ public class TicTacToeGame {
                 players
         );
 
+        while(gameController.getGameStatus(game).equals(GameStatus.IN_PROGRESS)){
+
+            System.out.println("This is current state of the board");
+            gameController.displayBoard(game);
+
+            System.out.println("Do you want to do an undo? yes/no");
+            String needUndo = scanner.next();
+
+            if(needUndo.equals("yes")){
+                gameController.undo(game);
+            }else{
+                gameController.executeNextMove(game);
+            }
+        };
+
+        // DRAW or ENDED
+        System.out.println("The game has ended");
+        if (game.getGameStatus().equals(GameStatus.ENDED))
+            System.out.println("The winner is: " + gameController.getWinner(game).getName());
+        gameController.displayBoard(game);
     }
 }
